@@ -1,0 +1,21 @@
+name: "Test Sample Action"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+    - uses: actions/checkout@v2
+    - id: foo
+      uses: ExxonMobil/actions-template@v1.0.0-alpha
+      with:
+        who-to-greet: 'Mona the Octocat'
+    - run: echo random-number ${{ steps.foo.outputs.random-number }} 
+      shell: bash
